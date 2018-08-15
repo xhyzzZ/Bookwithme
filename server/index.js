@@ -4,7 +4,7 @@ const config = require('./config');
 const bodyParser = require('body-parser');
 const FakeDb = require('./fake-db');
 const Rental = require('./models/rental');
-
+const path = require('path');
 
 const rentalRoutes = require('./routes/rentals');
 const userRoutes = require('./routes/users');
