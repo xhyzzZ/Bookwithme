@@ -6,6 +6,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { MapModule } from '../common/map/map.module';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { FormsModule } from '@angular/forms';
+import { EditableModule } from '../common/components/editable/editable.module';
 
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListItemComponent } from './rental-list-item/rental-list-item.component';
@@ -22,12 +23,14 @@ import { AuthGuard } from '../auth/shared/auth.guard';
 import { RentalDetailBookingComponent } from './rental-detail/rental-detail-booking/rental-detail-booking.component';
 import { RentalSearchComponent } from './rental-search/rental-search.component';
 import { RentalCreateComponent } from './rental-create/rental-create.component';
+import { RentalUpdateComponent } from './rental-update/rental-update.component';
 const routes: Routes = [
   {path: 'rentals',
    component: RentalComponent,
    children: [
      { path: '', component: RentalListComponent },
      { path: 'new', component: RentalCreateComponent, canActivate: [AuthGuard]},
+     { path: ':rentalId/edit', component: RentalUpdateComponent, canActivate: [AuthGuard]},
      { path: ':rentalId', component: RentalDetailComponent },
      { path: ':city/homes', component: RentalSearchComponent }
    ]
@@ -43,7 +46,8 @@ const routes: Routes = [
     UppercasePipe,
     RentalDetailBookingComponent,
     RentalSearchComponent,
-    RentalCreateComponent
+    RentalCreateComponent,
+    RentalUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +56,8 @@ const routes: Routes = [
     NgPipesModule,
     MapModule,
     Daterangepicker,
-    FormsModule
+    FormsModule,
+    EditableModule
   ],
   providers: [
     RentalService,
