@@ -1,0 +1,29 @@
+<div class="editable-component">
+
+  <input *ngIf="isActivateInput"
+    class="{{className}}"
+    type="text"
+    [(ngModel)]="entity[field]"
+    [value]="entity[field]">
+
+  <span *ngIf="!isActivateInput" class="{{className}} inline">{{entity[field]}}</span>
+  <div class="inline">
+    <button *ngIf="!isActivateInput"
+      class="btn btn-sm btn-warning btn-editable"
+      (click)="isActivateInput = true">
+      Edit
+    </button>
+
+    <button *ngIf="isActivateInput"
+      class="btn btn-sm btn-success btn-editable"
+      (click)="updateEntity()">
+      Save
+    </button>
+
+    <button *ngIf="isActivateInput"
+      class="btn btn-sm btn-danger btn-editable"
+      (click)="isActivateInput = false">
+      Cancel
+    </button>
+  </div>
+</div>
