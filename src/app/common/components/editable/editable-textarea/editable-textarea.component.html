@@ -1,14 +1,16 @@
 <div [ngStyle]="style" class="editable-component">
 
-  <input *ngIf="isActivateInput"
+  <textarea *ngIf="isActivateInput"
     class="{{className}}"
-    type="type"
+    [(ngModel)]="entity[entityField]"
+    [value]="entity[entityField]"
     (keydown.escape)="cancelUpdate()"
     (keyup.enter)="updateEntity()"
-    [(ngModel)]="entity[entityField]"
-    [value]="entity[entityField]">
+    rows="{{rows}}"
+    cols="{{cols}}">
+  </textarea>
 
-  <span *ngIf="!isActivateInput" class="{{className}} inline">{{transformView(entity[entityField])}}</span>
+  <span *ngIf="!isActivateInput" class="{{className}} inline">{{entity[entityField]}}</span>
   <div class="inline">
     <button *ngIf="!isActivateInput"
       class="btn btn-sm btn-warning btn-editable"
