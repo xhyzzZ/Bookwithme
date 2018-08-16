@@ -5,8 +5,9 @@
         <img src="{{rental.image}}" alt="">
       </div>
       <div class="col-md-6">
-        <!-- Will be replaced with map !!!! -->
-        <bwm-map [location]="rental.city + ', ' + rental.street"></bwm-map>
+        <bwm-map
+        [locationSubject]="locationSubject"
+        [location]="rental.city + ', ' + rental.street"></bwm-map>
       </div>
     </div>
   </div>
@@ -15,26 +16,78 @@
     <div class="row">
       <div class="col-md-8">
         <div class="rental">
-          <h2 class="rental-type {{rental.category}}">{{rental.shared ? 'Shared' : 'Whole'}} {{rental.category}}</h2>
+          <h2 class="rental-type {{rental.category}}">
+            Shared
+            <bwm-editable-select
+            [(entity)]="rental"
+            [field]="'shared'"
+            [options]="[true, false]"
+            [style]="{'display': 'inline-block'}"
+            [className]="'rental-shared'"
+            (entityUpdated)="updateRental(rental._id, $event)">
+            </bwm-editable-select>
+
+            <bwm-editable-select
+            [(entity)]="rental"
+            [field]="'category'"
+            [options]="rentalCategories"
+            [className]="'rental-category'"
+            (entityUpdated)="updateRental(rental._id, $event)">
+            </bwm-editable-select>
+          </h2>
           <div class="rental-owner">
             <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
             <span>{{rental.user.username}}</span>
           </div>
+
            <bwm-editable-input
            [(entity)]="rental"
            [field]="'title'"
            [className]="'rental-title'"
            (entityUpdated)="updateRental(rental._id, $event)">
            </bwm-editable-input>
-          <h2 class="rental-city">{{rental.city | ucwords}}</h2>
+
+
+          <bwm-editable-input
+          [(entity)]="rental"
+          [field]="'city'"
+          [transformView]="transformLocation"
+          [className]="'rental-city'"
+          (entityUpdated)="updateRental(rental._id, $event)">
+          </bwm-editable-input>
+
+          <bwm-editable-input
+          [(entity)]="rental"
+          [field]="'street'"
+          [transformView]="transformLocation"
+          [className]="'rental-street'"
+          (entityUpdated)="updateRental(rental._id, $event)">
+          </bwm-editable-input>
+
           <div class="rental-room-info">
-            <span><i class="fa fa-building"></i>{{rental.bedrooms}} bedrooms</span>
-            <span><i class="fa fa-user"></i> {{rental.bedrooms + 4}} guests</span>
-            <span><i class="fa fa-bed"></i> {{rental.bedrooms + 2}} beds</span>
+            <span><i class="fa fa-building"></i>
+              <bwm-editable-input
+              [(entity)]="rental"
+              [field]="'bedrooms'"
+              [type]="'number'"
+              [style]="{'display': 'inline-block'}"
+              [className]="'rental-bedrooms'"
+              (entityUpdated)="updateRental(rental._id, $event)">
+              </bwm-editable-input> bedrooms
+            </span>
+            <span><i class="fa fa-user"></i> {{countBedroonAssets(4)}} guests</span>
+            <span><i class="fa fa-bed"></i> {{countBedroonAssets(2)}} beds</span>
           </div>
-          <p class="rental-description">
-            {{rental.description}}
-          </p>
+
+          <bwm-editable-textarea
+          [(entity)]="rental"
+          [field]="'description'"
+          [className]="'rental-description'"
+          [rows]="'6'"
+          [cols]="'50'"
+          (entityUpdated)="updateRental(rental._id, $event)">
+          </bwm-editable-textarea>
+
           <hr>
           <div class="rental-assets">
             <h3 class="title">Assets</h3>

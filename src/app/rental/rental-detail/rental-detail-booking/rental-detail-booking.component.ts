@@ -42,7 +42,7 @@ export class RentalDetailBookingComponent implements OnInit {
               private toastr: ToastsManager,
               private vcr: ViewContainerRef,
               public auth: AuthService) {
-    this.toastr.setRootViewContainerRef(vcr)
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
