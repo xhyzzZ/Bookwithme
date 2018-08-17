@@ -1,0 +1,7 @@
+<img *ngIf="!isActivateInput" class='editable-image' [src]="entity[entityField]">
+
+<bwm-image-upload (imageUploaded)="handleImageUpload($event)"
+                  (imageError)="handleImageError()"
+                  (imageLoadedToContainer)="handleImageLoad()"
+                  (croppingCanceled)="cancelUpdate()">
+</bwm-image-upload>
