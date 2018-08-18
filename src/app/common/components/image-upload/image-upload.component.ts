@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ImageUploadService } from './image-upload.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 
 class FileSnippet {
@@ -32,9 +32,7 @@ export class ImageUploadComponent {
   imageChangedEvent: any;
 
   constructor(private imageService: ImageUploadService,
-              private toastr: ToastsManager,
-              private vcr: ViewContainerRef) {
-              this.toastr.setRootViewContainerRef(vcr)
+              private toastr: ToastrService) {
   }
 
   private onSuccess(imageUrl: string) {
